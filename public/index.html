@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>rpsls</title>
+        <title>Play RPSLS!</title>
         <!-- Link to your script file(s) and CSS in here somewhere -->
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
@@ -12,53 +12,58 @@
     <!-- Your interface markup goes here -->
     <!-- For interface examples, look in the `/examples/` directory in the root of your starter code repo. -->
 
-    <!-- Choose between RPS and RPSLS and whether playing against opponent -->
     <div id="game_options" class="active">
+        <h1>ROCK PAPER SCISSORS (AND DLC) Game</h1>
+        <h4><i>Choose a game mode:</i></h4>
         <input type="radio" id="rps" name="game_option" value="rps" onclick="displayRPSLSOptions()">
-        <label for="rps">play Rock Paper Scissors (rps)</label>
+        <label for="rps">Rock Paper Scissors</label>
+        <br>
         <br>
         <input type="radio" id="rpsls" name="game_option" value="rpsls" onclick="displayRPSLSOptions()">
-        <label for="rpsls">play Rock Paper Scissors Lizard Spock (rpsls)</label>
-        <br><br>
-        <input type="checkbox" id="opponent" name="opponent_option" value="opponent" onclick="displayShots()">
-        <label for="opponent">play an opponent</label>
-        <br><br>
+        <label for="rpsls">Rock Paper Scissors Lizard Spock (DLC!)</label>
+        <br>
+        <h4><i>Choose a player mode:</i></h4>
+        <input type="radio" id="opponent" name="opponent_option" value="opponent" onclick="displayShots()">
+        <label for="opponent">Play against computer</label>
+        <br>
+        <br>
+        <input type="radio" id="opponent" name="opponent_option" value="opponent" onclick="displayShots()">
+        <label for="opponent">Play against another player</label>
     </div>
 
-    <!-- Show RPS or RPSLS options if opponent checkbox is checked -->
     <div id="shot_options" class="inactive">
+        <h4><i>Choose your option:</i></h4>
         <input type="radio" id="rock" name="rps_shot_option" value="rock">
-        <label for="rock" name="rps_shot_option">rock</label>
-        <br>
+        <label for="rock" name="rps_shot_option">Rock</label>
         <input type="radio" id="paper" name="rps_shot_option" value="paper">
-        <label for="paper" name="rps_shot_option">paper</label>
-        <br>
+        <label for="paper" name="rps_shot_option">Paper</label>
         <input type="radio" id="scissors" name="rps_shot_option" value="scissors">
-        <label for="scissors" name="rps_shot_option">scissors</label>
-        <br>
+        <label for="scissors" name="rps_shot_option">Scissors</label>
         <input type="radio" id="lizard" name="rpsls_shot_option" value="lizard">
-        <label for="lizard" name="rpsls_shot_option">lizard</label>
-        <br>
+        <label for="lizard" name="rpsls_shot_option">Lizard</label>
         <input type="radio" id="spock" name="rpsls_shot_option" value="spock">
-        <label for="spock" name="rpsls_shot_option">spock</label>
+        <label for="spock" name="rpsls_shot_option">Spock</label>
         <br><br>
     </div>
 
-    <!-- Result -->
     <p id="result" class="inactive">
         result text
         <br><br>
     </p>
 
-    <!-- Play and start over buttons -->
     <div id="buttons" class="active">
-        <button id="play" type="submit" name="control_option" onclick="play()">play</button>
-        <button id="start_over" type="submit" name="control_option" onclick="startOver()">start over</button>
+        <br>
+        <br>
+        <button id="play" type="submit" name="control_option" onclick="play()">PLAY</button>
+        <br>
+        <br>
+        <br>
+        <button id="start_over" type="submit" name="control_option" onclick="startOver()">RESTART</button>
         <br><br>
     </div>
 
     <!-- Link to rules -->
-    <p><a href="rules.html">rules-for-rpsls</a></p>
+    <p><a href="rules.html">Rules for RPCLS →</a></p>
 
     </body>
 </html>

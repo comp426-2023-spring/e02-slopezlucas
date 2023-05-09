@@ -1,71 +1,137 @@
 function displayShots() {
-    const rpsChecked = document.getElementById("rps").checked;
-    const rpslsChecked = document.getElementById("rpsls").checked;
-    if (!rpsChecked && !rpslsChecked) {
+    let rps_checked = document.getElementById("rps").checked;
+    let rpsls_checked = document.getElementById("rpsls").checked;
+
+    if (rps_checked == false && rpsls_checked == false) {
         document.getElementById("rps").click();
     }
-    const shotOptions = document.getElementById("shot_options");
-    const opponentChecked = document.getElementById("opponent").checked;
-    shotOptions.className = opponentChecked ? "active" : "inactive";
+
+    let shot_options = document.getElementById("shot_options");
+    let opponent_checked = document.getElementById("opponent").checked;
+
+    if (opponent_checked) {
+        shot_options.className = "active";
+    } else {
+        shot_options.className = "inactive";
+    }
 }
 
 function displayRPSLSOptions() {
-    const rpsShotOptions = document.getElementsByName("rps_shot_option");
-    rpsShotOptions.forEach(rpsShotOption => rpsShotOption.className = "active");
+    let rps_shot_options = document.getElementsByName("rps_shot_option");
 
-    const rpslsChecked = document.getElementById("rpsls").checked;
-    const rpslsShotOptions = document.getElementsByName("rpsls_shot_option");
-    rpslsShotOptions.forEach(rpslsShotOption => rpslsShotOption.className = rpslsChecked ? "active" : "inactive");
+    for (let i = 0; i < rps_shot_options.length; i++) {
+        let rps_shot_option = rps_shot_options[i];
+        rps_shot_option.className = "active";
+    }
+
+    let rpsls_checked = document.getElementById("rpsls").checked;
+    let rpsls_shot_options = document.getElementsByName("rpsls_shot_option");
+
+    for (let i = 0; i < rpsls_shot_options.length; i++) {
+        let rpsls_shot_option = rpsls_shot_options[i];
+
+        if (rpsls_checked) {
+            rpsls_shot_option.className = "active";
+        } else {
+            rpsls_shot_option.className = "inactive";
+        }
+    }
 }
 
 async function play() {
-    const rpsChecked = document.getElementById("rps").checked;
-    const rpslsChecked = document.getElementById("rpsls").checked;
-    if (!rpsChecked && !rpslsChecked) {
+    let rps_checked = document.getElementById("rps").checked;
+    let rpsls_checked = document.getElementById("rpsls").checked;
+
+    if (rps_checked == false && rpsls_checked == false) {
         alert("Please select a game mode.");
         throw new RangeError(`Must select game mode before playing.`);
     }
-    document.getElementById("game_options").className = "inactive";
-    document.getElementById("shot_options").className = "inactive";
-    document.getElementById("result").className = "active";
-    document.getElementById("play").className = "inactive";
 
-    const gameMode = rpsChecked ? "rps" : "rpsls";
-    const opponentChecked = document.getElementById("opponent").checked;
+    let game_options = document.getElementById("game_options");
+    game_options.className = "inactive";
+
+    let shot_options = document.getElementById("shot_options");
+    shot_options.className = "inactive";
+
+    let result = document.getElementById("result");
+    result.className = "active";
+
+    let play_button = document.getElementById("play");
+    play_button.className = "inactive";
+
+    let game_mode = rps_checked ? "rps" : "rpsls";
+    let opponent_checked = document.getElementById("opponent").checked;
     let shot = "";
-    if (opponentChecked) {
-        shot = document.querySelector('input[type="radio"][name*="shot_option"]:checked').value;
+
+    if (opponent_checked) {
+        let shot_option_elements = document.querySelectorAll('input[type="radio"][name*="shot_option"]');
+        for (let i = 0; i < shot_option_elements.length; i++) {
+            let shot_option_element = shot_option_elements[i];
+
+            if (shot_option_element.checked) {
+                shot = shot_option_element.value;
+                break;
+            }
+        }
     }
 
-    const apiUrl = `${document.baseURI}app/${gameMode}/play/${shot}`;
-    const response = await fetch(apiUrl);
-    const result = await response.json();
-    console.log(result);
-    const resultElement = document.getElementById("result");
-    if (opponentChecked) {
-        resultElement.innerHTML = `<p>You: ${capitalizeFirstLetter(result.player)}</p>
-        <p>Your opponent: ${capitalizeFirstLetter(result.opponent)}</p>
-        <p>Result: You ${result.result.toUpperCase()}</p>`;
+    let api_url = `${document.baseURI}app/${game_mode}/play/${shot}`;
+    let response = await fetch(api_url);
+    let json = await response.json();
+
+    console.log(json);
+
+    if (opponent_checked) {
+        let player_element = document.createElement("p");
+        player_element.innerHTML = `You: ${capitalizeFirstLetter(json.player)}`;
+        result.appendChild(player_element);
+
+        let opponent_element = document.createElement("p");
+        opponent_element.innerHTML = `Your opponent: ${capitalizeFirstLetter(json.opponent)}`;
+        result.appendChild(opponent_element);
+
+        let result_element = document.createElement("p");
+        result_element.innerHTML = `Result: You ${json.result.toUpperCase()}`;
+        result.appendChild(result_element);
     } else {
-        resultElement.innerHTML = result.player.toUpperCase();
+        result.innerHTML = capitalizeFirstLetter(json.player);
     }
 }
 
 function startOver() {
-    document.getElementById("game_options").className = "active";
-    document.getElementById("shot_options").className = "inactive";
-    document.getElementById("result").className = "inactive";
-    document.getElementById("play").className = "active";
+    let game_options = document.getElementById("game_options");
+    game_options.className = "active";
+    let shot_options = document.getElementById("shot_options");
+    shot_options.className = "inactive";
     
-    // Uncheck all buttons
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => checkbox.checked = false);
-}
-
-/**
- * @param {*} string 
- * @returns string with first letter capitalized
- */
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+    let result = document.getElementById("result");
+    result.className = "inactive";
+    result.innerHTML = "";
+    
+    let play_button = document.getElementById("play");
+    play_button.className = "active";
+    
+    let opponent = document.getElementById("opponent");
+    opponent.checked = false;
+    
+    let rpsls_shot_options = document.getElementsByName("rpsls_shot_option");
+    
+    for (let i = 0; i < rpsls_shot_options.length; i++) {
+        let rpsls_shot_option = rpsls_shot_options[i];
+        rpsls_shot_option.className = "inactive";
+        rpsls_shot_option.checked = false;
+    }
+    
+    }
+    
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    
+    displayShots();
+    document.getElementById("rps").addEventListener("click", displayShots);
+    document.getElementById("rpsls").addEventListener("click", displayShots);
+    document.getElementById("opponent").addEventListener("click", displayShots);
+    document.getElementById("opponent").addEventListener("click", displayRPSLSOptions);
+    document.getElementById("play").addEventListener("click", play);
+    document.getElementById("start_over").addEventListener("click", startOver);

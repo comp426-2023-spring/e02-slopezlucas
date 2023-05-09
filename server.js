@@ -69,10 +69,8 @@ app.use(morgan(':remote-addr - :remote-user [:date[iso]] ":method :url HTTP/:htt
     {stream: fs.createWriteStream(path.join(logpath, 'access.log')), flags: 'a' }
 ))
 import { rps, rpsls } from './lib/rpsls.js';
-
+app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
-const argv = minimist(process.argv.slice(2));
 
 //200 OK!
 app.get('/app', (req, res, next) => {
@@ -114,11 +112,6 @@ app.get('/app/rps/play/:shot', (req, res) => {
 app.get('/app/rpsls/play/:shot', (req, res) => {
     const player = rpsls(req.params.shot);
     res.status(200).send(player);
-});
-
-//Defaults to this for endpoint catcher?
-app.use(function(req, res){
-    res.status(404).json({'message': '404 NOT FOUND'});
 });
 
 // Serve static files

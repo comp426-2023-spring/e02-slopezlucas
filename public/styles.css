@@ -6,3 +6,56 @@ h1 {
 
 p {
 }
+
+input {
+
+}
+
+button {
+    background-color: #75e1ff;
+    border-radius: 3px;
+    border-color: #5eafe5;
+    font-style: oblique;
+}
+input[type=radio] {
+    accent-color: rgb(133, 206, 255);
+}
+p.active {
+    display: block;
+}
+
+p.inactive {
+    display: none;
+}
+
+div.active {
+    display: block;
+}
+
+div.inactive {
+    display: none;
+}
+
+input.active {
+    display: inline;
+}
+
+input.inactive {
+    display: none;
+}
+
+label.active {
+    display: inline;
+}
+
+label.inactive {
+    display: none;
+}
+
+button.active {
+    display: inline;
+}
+
+button.inactive {
+    display: none;
+}
