@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Rock Paper Scissors Lizard Spock</title>
-    <script src="scripts.js"></script>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -11,11 +10,56 @@
         <h1>Rock Paper Scissors Lizard Spock</h1>
         <p>Choose your game:</p>
         <label>
-            <input type="radio" name="game" value="rps" checked> Rock-Paper-Scissors
+            <input type="radio" name="game" value="rps" checked onclick="toggleGame('rps')"> Rock-Paper-Scissors
         </label>
         <label>
-            <input type="radio" name="game" value="rpsls"> Rock-Paper-Scissors-Lizard-Spock
+            <input type="radio" name="game" value="rpsls" onclick="toggleGame('rpsls')"> Rock-Paper-Scissors-Lizard-Spock
         </label>
+
+        <div id="rps-game" style="display:none">
+            <p>Select your choice:</p>
+            <div class="choices">
+                <div class="choice">
+                    <img src="/img/rock.png" alt="rock">
+                    <input type="radio" name="choice" value="rock" checked>
+                </div>
+                <div class="choice">
+                    <img src="/img/paper.png" alt="paper">
+                    <input type="radio" name="choice" value="paper">
+                </div>
+                <div class="choice">
+                    <img src="/img/scissors.png" alt="scissors">
+                    <input type="radio" name="choice" value="scissors">
+                </div>
+            </div>
+        </div>
+
+        <div id="rpsls-game" style="display:none">
+            <p>Select your choice:</p>
+            <div class="choices">
+                <div class="choice">
+                    <img src="/img/rock.png" alt="rock">
+                    <input type="radio" name="choice" value="rock" checked>
+                </div>
+                <div class="choice">
+                    <img src="/img/paper.png" alt="paper">
+                    <input type="radio" name="choice" value="paper">
+                </div>
+                <div class="choice">
+                    <img src="/img/scissors.png" alt="scissors">
+                    <input type="radio" name="choice" value="scissors">
+                </div>
+                <div class="choice">
+                    <img src="/img/lizard.png" alt="lizard">
+                    <input type="radio" name="choice" value="lizard">
+                </div>
+                <div class="choice">
+                    <img src="/img/spock.png" alt="spock">
+                    <input type="radio" name="choice" value="spock">
+                </div>
+            </div>
+        </div>
+
         <p>Choose your opponent:</p>
         <label>
             <input type="radio" name="opponent" value="human" checked> Human
@@ -23,35 +67,32 @@
         <label>
             <input type="radio" name="opponent" value="computer"> Computer
         </label>
-        <p>Select your choice:</p>
-        <div class="choices">
-            <div class="choice">
-                <img src="/img/rock.png" alt="rock">
-                <input type="radio" name="choice" value="rock" checked>
-            </div>
-            <div class="choice">
-                <img src="/img/paper.png" alt="paper">
-                <input type="radio" name="choice" value="paper">
-            </div>
-            <div class="choice">
-                <img src="/img/scissors.png" alt="scissors">
-                <input type="radio" name="choice" value="scissors">
-            </div>
-            <div class="choice">
-                <img src="/img/lizard.png" alt="lizard">
-                <input type="radio" name="choice" value="lizard">
-            </div>
-            <div class="choice">
-                <img src="/img/spock.png" alt="spock">
-                <input type="radio" name="choice" value="spock">
-            </div>
-        </div>
+        
         <div class="buttons">
             <button id="play">Play</button>
             <button id="reset">Reset</button>
         </div>
+        
         <a href="/rules.html">Rules</a>
+    </div>
+    <div class="game-container">
+        <div class="game rps">
+            <h2>Rock-Paper-Scissors</h2>
+            <div class="result">
+                <p>You chose <span id="player-choice"></span>.</p>
+                <p>The computer chose <span id="computer-choice"></span>.</p>
+                <h3 id="outcome"></h3>
+            </div>
+        </div>
+        <div class="game rpsls">
+            <h2>Rock-Paper-Scissors-Lizard-Spock</h2>
+            <div class="result">
+                <p>You chose <span id="player-choice"></span>.</p>
+                <p>The computer chose <span id="computer-choice"></span>.</p>
+                <h3 id="outcome"></h3>
+            </div>
+        </div>
     </div>
     <script src="/scripts.js"></script>
 </body>
-</html>
+</html> 
