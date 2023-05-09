@@ -103,10 +103,8 @@ process.on('SIGINT', () => {
     })
 })
 
-import express from 'express';
 import { rps, rpsls } from './lib/rpsls.js';
 
-app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 const argv = minimist(process.argv.slice(2));
